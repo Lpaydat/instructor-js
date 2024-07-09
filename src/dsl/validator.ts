@@ -1,8 +1,9 @@
-import { InstructorClient } from "@/instructor"
-import OpenAI from "openai"
-import { RefinementCtx, z } from "zod"
+import OpenAI from "openai";
+import { RefinementCtx, z } from "zod";
 
-import { GenericClient } from ".."
+import { InstructorClient } from "@/instructor";
+
+import { GenericClient } from "../";
 
 type AsyncSuperRefineFunction = (data: string, ctx: RefinementCtx) => Promise<void>
 

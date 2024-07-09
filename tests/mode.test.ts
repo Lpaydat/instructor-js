@@ -1,10 +1,15 @@
-import Instructor from "@/instructor"
-import { describe, expect, test } from "bun:test"
-import OpenAI from "openai"
-import { z } from "zod"
-import { type Mode } from "zod-stream"
+import { describe, expect, test } from "bun:test";
+import { Mode } from "json-schema-stream";
+import OpenAI from "openai";
+import { z } from "zod";
 
-import { MODE, Provider, PROVIDER_SUPPORTED_MODES_BY_MODEL, PROVIDERS } from "@/constants/providers"
+import {
+    MODE,
+    Provider,
+    PROVIDER_SUPPORTED_MODES_BY_MODEL,
+    PROVIDERS
+} from "@/constants/providers";
+import Instructor from "@/instructor";
 
 const default_oai_model = "gpt-4o"
 const default_anyscale_model = "mistralai/Mixtral-8x7B-Instruct-v0.1"

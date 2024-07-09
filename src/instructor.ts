@@ -1,29 +1,35 @@
-import {
-  ChatCompletionCreateParamsWithModel,
-  ClientTypeChatCompletionRequestOptions,
-  GenericChatCompletion,
-  GenericClient,
-  InstructorConfig,
-  LogLevel,
-  OpenAILikeClient,
-  ReturnTypeBasedOnParams
-} from "@/types"
-import OpenAI from "openai"
-import { Stream } from "openai/streaming"
-import { z, ZodError } from "zod"
-import ZodStream, { OAIResponseParser, OAIStream, withResponseModel, type Mode } from "zod-stream"
-import { fromZodError } from "zod-validation-error"
+import ZodStream, {
+    Mode,
+    OAIResponseParser,
+    OAIStream,
+    withResponseModel
+} from "json-schema-stream";
+import OpenAI from "openai";
+import { Stream } from "openai/streaming";
+import { z, ZodError } from "zod";
+import { fromZodError } from "zod-validation-error";
 
 import {
-  NON_OAI_PROVIDER_URLS,
-  Provider,
-  PROVIDER_PARAMS_TRANSFORMERS,
-  PROVIDER_SUPPORTED_MODES,
-  PROVIDER_SUPPORTED_MODES_BY_MODEL,
-  PROVIDERS
-} from "./constants/providers"
-import { iterableTee } from "./lib"
-import { ClientTypeChatCompletionParams, CompletionMeta } from "./types"
+    ChatCompletionCreateParamsWithModel,
+    ClientTypeChatCompletionRequestOptions,
+    GenericChatCompletion,
+    GenericClient,
+    InstructorConfig,
+    LogLevel,
+    OpenAILikeClient,
+    ReturnTypeBasedOnParams
+} from "@/types";
+
+import {
+    NON_OAI_PROVIDER_URLS,
+    Provider,
+    PROVIDER_PARAMS_TRANSFORMERS,
+    PROVIDER_SUPPORTED_MODES,
+    PROVIDER_SUPPORTED_MODES_BY_MODEL,
+    PROVIDERS
+} from "./constants/providers";
+import { iterableTee } from "./lib";
+import { ClientTypeChatCompletionParams, CompletionMeta } from "./types";
 
 const MAX_RETRIES_DEFAULT = 0
 

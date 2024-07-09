@@ -1,12 +1,9 @@
-import OpenAI from "openai"
-import { Stream } from "openai/streaming"
-import { z } from "zod"
-import {
-  CompletionMeta as ZCompletionMeta,
-  type Mode as ZMode,
-  type ResponseModel as ZResponseModel
-} from "zod-stream"
+import { CompletionMeta as ZCompletionMeta } from "json-schema-stream";
+import OpenAI from "openai";
+import { Stream } from "openai/streaming";
+import { z } from "zod";
 
+import type { Mode as ZMode, ResponseModel as ZResponseModel } from "json-schema-stream"
 export type GenericCreateParams<M = unknown> = Omit<
   Partial<OpenAI.ChatCompletionCreateParams>,
   "model" | "messages"

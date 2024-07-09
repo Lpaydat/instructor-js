@@ -18,14 +18,8 @@
     "",
     "^[./]"
   ],
-  "importOrderParserPlugins": [
-    "typescript",
-    "jsx",
-    "decorators-legacy"
-  ],
-  "plugins": [
-    "@ianvs/prettier-plugin-sort-imports"
-  ],
+  "importOrderParserPlugins": ["typescript", "jsx", "decorators-legacy"],
+  "plugins": ["@ianvs/prettier-plugin-sort-imports"],
   "printWidth": 100,
   "proseWrap": "never",
   "quoteProps": "consistent",
