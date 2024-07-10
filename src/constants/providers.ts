@@ -113,12 +113,14 @@ export const PROVIDER_SUPPORTED_MODES_BY_MODEL = {
     [MODE.JSON_SCHEMA]: [
       "mistralai/Mixtral-8x7B-Instruct-v0.1",
       "mistralai/Mistral-7B-Instruct-v0.1",
-      "togethercomputer/CodeLlama-34b-Instruct"
+      "togethercomputer/CodeLlama-34b-Instruct",
+      "Qwen/Qwen1.5-4B-Chat"
     ],
     [MODE.TOOLS]: [
       "mistralai/Mixtral-8x7B-Instruct-v0.1",
       "mistralai/Mistral-7B-Instruct-v0.1",
-      "togethercomputer/CodeLlama-34b-Instruct"
+      "togethercomputer/CodeLlama-34b-Instruct",
+      "Qwen/Qwen1.5-4B-Chat"
     ]
   },
   [PROVIDERS.ANYSCALE]: {
