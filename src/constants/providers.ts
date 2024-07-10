@@ -24,7 +24,7 @@ export const PROVIDER_SUPPORTED_MODES: {
   [PROVIDERS.ANYSCALE]: [MODE.TOOLS, MODE.JSON, MODE.JSON_SCHEMA, MODE.MD_JSON],
   [PROVIDERS.TOGETHER]: [MODE.TOOLS, MODE.JSON, MODE.JSON_SCHEMA, MODE.MD_JSON],
   [PROVIDERS.ANTHROPIC]: [MODE.MD_JSON, MODE.TOOLS],
-  [PROVIDERS.GROQ]: [MODE.TOOLS, MODE.FUNCTIONS, MODE.MD_JSON]
+  [PROVIDERS.GROQ]: [MODE.TOOLS, MODE.FUNCTIONS, MODE.MD_JSON, MODE.JSON, MODE.JSON_SCHEMA]
 } as const
 
 export const NON_OAI_PROVIDER_URLS = {
@@ -110,6 +110,12 @@ export const PROVIDER_SUPPORTED_MODES_BY_MODEL = {
   },
   [PROVIDERS.TOGETHER]: {
     [MODE.MD_JSON]: ["*"],
+    [MODE.JSON]: [
+      "mistralai/Mixtral-8x7B-Instruct-v0.1",
+      "mistralai/Mistral-7B-Instruct-v0.1",
+      "togethercomputer/CodeLlama-34b-Instruct",
+      "Qwen/Qwen1.5-4B-Chat"
+    ],
     [MODE.JSON_SCHEMA]: [
       "mistralai/Mixtral-8x7B-Instruct-v0.1",
       "mistralai/Mistral-7B-Instruct-v0.1",
@@ -125,6 +131,7 @@ export const PROVIDER_SUPPORTED_MODES_BY_MODEL = {
   },
   [PROVIDERS.ANYSCALE]: {
     [MODE.MD_JSON]: ["*"],
+    [MODE.JSON]: ["*"],
     [MODE.JSON_SCHEMA]: [
       "mistralai/Mistral-7B-Instruct-v0.1",
       "mistralai/Mixtral-8x7B-Instruct-v0.1"
@@ -136,7 +143,10 @@ export const PROVIDER_SUPPORTED_MODES_BY_MODEL = {
     [MODE.TOOLS]: ["*"]
   },
   [PROVIDERS.GROQ]: {
-    [MODE.TOOLS]: ["mixtral-8x7b-32768", "gemma-7b-it"],
-    [MODE.MD_JSON]: ["*"]
+    [MODE.FUNCTIONS]: ["*"],
+    [MODE.TOOLS]: ["*"],
+    [MODE.JSON]: ["*"],
+    [MODE.MD_JSON]: ["*"],
+    [MODE.JSON_SCHEMA]: ["*"]
   }
 }
