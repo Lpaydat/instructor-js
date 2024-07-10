@@ -64,6 +64,8 @@ export type Mode = ZMode
 
 export type ResponseModel<T extends z.AnyZodObject> = ZResponseModel<T>
 
+export type ZodResponseModel<T extends z.AnyZodObject> = ZResponseModel<T> & { schema: T }
+
 export interface InstructorConfig<C> {
   client: C
   mode: Mode

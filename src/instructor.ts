@@ -17,7 +17,8 @@ import {
     InstructorConfig,
     LogLevel,
     OpenAILikeClient,
-    ReturnTypeBasedOnParams
+    ReturnTypeBasedOnParams,
+    ZodResponseModel
 } from "@/types";
 
 import {
@@ -30,6 +31,7 @@ import {
 } from "./constants/providers";
 import { iterableTee } from "./lib";
 import { ClientTypeChatCompletionParams, CompletionMeta } from "./types";
+import { dataValidation } from "./utils/dataValidation";
 
 const MAX_RETRIES_DEFAULT = 0
 
@@ -235,7 +237,7 @@ class Instructor<C> {
       try {
         const data = await makeCompletionCall()
 
-        const validation = await response_model.schema.safeParseAsync(data)
+        const validation = await dataValidation(data, response_model.schema)
         this.log("debug", response_model.name, "Completion validation: ", validation)
 
         if (!validation.success) {
@@ -304,6 +306,12 @@ class Instructor<C> {
   ): AsyncGenerator<Partial<T> & { _meta?: CompletionMeta }, void, unknown> {
     if (max_retries) {
       this.log("warn", "max_retries is not supported for streaming completions")
+    }
+
+    if (!(response_model.schema instanceof z.ZodObject)) {
+      throw new Error(
+        "Schema must be a ZodObject. Streaming completions currently do not support JSONSchema."
+      )
     }
 
     const paramsTransformer = PROVIDER_PARAMS_TRANSFORMERS?.[this.provider]?.[this.mode]
@@ -389,7 +397,7 @@ class Instructor<C> {
           throw new Error("Unsupported client type")
         }
       },
-      response_model
+      response_model: response_model as ZodResponseModel<T>
     })
 
     for await (const chunk of structuredStream) {
@@ -428,7 +436,7 @@ class Instructor<C> {
         this.validateModelModeSupport(params)
 
         if (this.isChatCompletionCreateParamsWithModel(params)) {
-          if (params.stream) {
+          if (params.stream && params.response_model instanceof z.ZodObject) {
             return this.chatCompletionStream(params, requestOptions) as ReturnTypeBasedOnParams<
               typeof this.client,
               P & { stream: true }
