@@ -10,18 +10,6 @@ import { z, ZodError } from "zod";
 import { fromZodError } from "zod-validation-error";
 
 import {
-    ChatCompletionCreateParamsWithModel,
-    ClientTypeChatCompletionRequestOptions,
-    GenericChatCompletion,
-    GenericClient,
-    InstructorConfig,
-    LogLevel,
-    OpenAILikeClient,
-    ReturnTypeBasedOnParams,
-    ZodResponseModel
-} from "@/types";
-
-import {
     NON_OAI_PROVIDER_URLS,
     Provider,
     PROVIDER_PARAMS_TRANSFORMERS,
@@ -30,7 +18,19 @@ import {
     PROVIDERS
 } from "./constants/providers";
 import { iterableTee } from "./lib";
-import { ClientTypeChatCompletionParams, CompletionMeta } from "./types";
+import {
+    ChatCompletionCreateParamsWithModel,
+    ClientTypeChatCompletionParams,
+    ClientTypeChatCompletionRequestOptions,
+    CompletionMeta,
+    GenericChatCompletion,
+    GenericClient,
+    InstructorConfig,
+    LogLevel,
+    OpenAILikeClient,
+    ReturnTypeBasedOnParams,
+    ZodResponseModel
+} from "./types";
 import { dataValidation } from "./utils/dataValidation";
 
 const MAX_RETRIES_DEFAULT = 0

@@ -1,9 +1,8 @@
 import OpenAI from "openai";
 import { RefinementCtx, z } from "zod";
 
-import { InstructorClient } from "@/instructor";
-
 import { GenericClient } from "../";
+import { InstructorClient } from "../instructor";
 
 type AsyncSuperRefineFunction = (data: string, ctx: RefinementCtx) => Promise<void>
 
