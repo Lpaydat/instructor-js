@@ -9,6 +9,8 @@ import { Stream } from "openai/streaming";
 import { z, ZodError } from "zod";
 import { fromZodError } from "zod-validation-error";
 
+import { Schema } from "@cfworker/json-schema";
+
 import {
     NON_OAI_PROVIDER_URLS,
     Provider,
@@ -237,7 +239,7 @@ class Instructor<C> {
       try {
         const data = await makeCompletionCall()
 
-        const validation = await dataValidation(data, response_model.schema)
+        const validation = await dataValidation(data, response_model.schema as Schema)
         this.log("debug", response_model.name, "Completion validation: ", validation)
 
         if (!validation.success) {

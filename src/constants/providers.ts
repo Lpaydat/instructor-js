@@ -1,10 +1,9 @@
-import { MODE as ZMODE, withResponseModel } from "json-schema-stream";
+import { Mode, MODE as ZMODE, withResponseModel } from "json-schema-stream";
 import OpenAI from "openai";
 import { z } from "zod";
 
 import { omit } from "../lib";
 
-import type { Mode } from "json-schema-stream"
 export const MODE = ZMODE
 export const PROVIDERS = {
   OAI: "OAI",

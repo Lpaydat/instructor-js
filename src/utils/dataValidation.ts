@@ -1,17 +1,19 @@
-import Ajv from "ajv";
-import { JSONSchema } from "json-schema-stream";
 import { z, ZodError } from "zod";
 
+import { Validator } from "@cfworker/json-schema";
+
+import type { Schema } from "@cfworker/json-schema";
+
 export const dataValidation = async <T extends z.AnyZodObject>(
-  data: object,
-  schema: T | JSONSchema
+  data: { [x: string]: unknown },
+  schema: T | Schema
 ): Promise<
   z.SafeParseReturnType<
     {
-      [x: string]: any
+      [x: string]: unknown
     },
     {
-      [x: string]: any
+      [x: string]: unknown
     }
   >
 > => {
@@ -19,11 +21,11 @@ export const dataValidation = async <T extends z.AnyZodObject>(
     return await schema.safeParseAsync(data)
   }
 
-  const ajv = new Ajv()
-  const validate = ajv.compile(schema)
-  const isValid = validate(data)
+  const validator = new Validator(schema)
+  const result = validator.validate(data)
 
-  return isValid ?
+
+  return result.valid ?
       {
         success: true,
         data: data
@@ -32,7 +34,7 @@ export const dataValidation = async <T extends z.AnyZodObject>(
         success: false,
         error: new ZodError([
           {
-            message: `Data validation failed. Schema: ${JSON.stringify(schema)}`,
+            message: `Data validation failed: ${result.errors.map(e => e.error).join(", ")}`,
             code: z.ZodIssueCode.custom,
             path: []
           }

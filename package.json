@@ -51,7 +51,7 @@
   },
   "homepage": "https://github.com/instructor-ai/instructor-js#readme",
   "dependencies": {
-    "ajv": "^8.16.0",
+    "@cfworker/json-schema": "^2.0.1",
     "json-schema-stream": "github:Lpaydat/json-schema-stream",
     "zod-stream": "1.0.3",
     "zod-validation-error": "^2.1.0"
