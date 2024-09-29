@@ -34,7 +34,7 @@ export const dataValidation = async <T extends z.AnyZodObject>(
         success: false,
         error: new ZodError([
           {
-            message: `Data validation failed: ${result.errors.map(e => e.error).join(", ")}`,
+            message: `Data validation failed. Schema: ${JSON.stringify(schema)}`,
             code: z.ZodIssueCode.custom,
             path: []
           }
